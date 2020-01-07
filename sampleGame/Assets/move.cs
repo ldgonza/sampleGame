@@ -13,6 +13,7 @@ public class Move : MonoBehaviour
     {
         this.state = new State.TimedState("WAITING");
         this.timer = new Timer.Timer();
+        
     }
 
     void Update()
