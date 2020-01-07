@@ -7,7 +7,7 @@ public class Move : MonoBehaviour
     private Timer.Timer timer;
     public float speed;
 
-    private State.State state;
+    public State.State state;
 
     void Start()
     {
@@ -19,10 +19,10 @@ public class Move : MonoBehaviour
         });
         */
 
-        this.state = new State.ChainedState(new State.State[] {
-            new State.TimedState("A", 120),
-            new State.TimedState("B", 200),
-            new State.TimedState("C", 100)
+        this.state = new State.ChainedState(new State.State[] 
+        {
+            new State.TimedState("A", 60),
+            new State.TimedState("B", 200),        
         }).Loops();
 
         this.timer = new Timer.Timer();
@@ -35,8 +35,8 @@ public class Move : MonoBehaviour
         for(int i = 0; i < frames; i++)
         {
             this.state.Update(1);
-            Debug.Log(this.state.Name);
-            Debug.Log(this.state.CurrentFrame);
+            //Debug.Log(this.state.Name);
+            //Debug.Log(this.state.CurrentFrame);
             var transform = GetComponent<Transform>();
             var pos = transform.position;
             pos.x += speed;

@@ -5,18 +5,35 @@ using UnityEngine;
 public class animacion : MonoBehaviour
 {
     [SerializeField] private Sprite[] frameArray;
-    private int currentFrame;
-    private float timer;
-    
+    [SerializeField] private Sprite[] frameArray2;
+    [SerializeField] private int[] duracion;
+  
+    private void Start()
+    {
+       
+    }
     private void Update()
     {
-        timer += Time.deltaTime;
+        var state = gameObject.GetComponent<Move>().state;
+        int frame = 0;
+        int total = state.CurrentFrame;
 
-        if (timer >= 1f)
+        for (int i = 0; i< duracion.Length; i++)
         {
-            timer -= 1f;
-            currentFrame++;
-            gameObject.GetComponent<SpriteRenderer>().sprite = frameArray[currentFrame];
+            if (total < duracion[i])
+            {
+                frame = i;
+                break;
+            }
+            total -= duracion[i];
+
         }
+        var animacion = frameArray;
+        if(state.Name == "B")
+        {
+            animacion = frameArray2;
+        }
+        gameObject.GetComponent<SpriteRenderer>().sprite = animacion[frame];
+
     }
 }

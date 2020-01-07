@@ -51,8 +51,7 @@ namespace State
 
             if (this.maxFrames != null)
             {
-                done = this.frames >= this.maxFrames;
-                Debug.Log(done);
+                done = this.frames >= this.maxFrames;              
                 this.frames = Math.Min(this.frames, this.maxFrames.Value);
             }
 
