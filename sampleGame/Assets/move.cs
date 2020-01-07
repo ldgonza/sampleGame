@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    private Timer timer;
+    private Timer.Timer timer;
     public float speed;
 
-    // Start is called before the first frame update
+    private State.State state;
+
     void Start()
     {
-        this.timer = new Timer();
+        this.state = new State.TimedState("WAITING");
+        this.timer = new Timer.Timer();
     }
 
-    // Update is called once per frame
     void Update()
     {
         int frames = this.timer.Update(Time.deltaTime);
         for(int i = 0; i < frames; i++)
         {
+            this.state.Update(1);
             var transform = GetComponent<Transform>();
             var pos = transform.position;
             pos.x += speed;
